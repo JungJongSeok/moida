@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>모이다</title>
+
+    <link rel="icon"
+          href="https://d1vv4p3ixxyri0.cloudfront.net/companies_logo/9b580f53ad109c40a4f1b62554e22bc1c085c2f351e46bee2550b07ea5bb7e51_148480204573333.png">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="-1"/>
+    <meta charset="utf-8">
+    <script src="js/w2a.js"></script>
+
+    <meta property="og:image"
+          content="https://cdn.consumerpost.co.kr/news/photo/201905/204279_104958_5755.png"/>
+
+</head>
+<body>
+<script type="text/javascript">
+
+    function getUrlParams() {
+        var params = {};
+
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+            function(str, key, value) {
+                params[key] = value;
+            }
+        );
+
+        return params;
+    }
+
+    var OS = {
+        IOS: /ipad|iphone|ipod/,
+        ANDROID: /android/,
+        CHROME: /chrome/
+    };
+
+    const URL = {
+        IOS_APP_STORE: "https://apps.apple.com/kr/app/한국투자증권-계좌개설포함/id1402480941",
+        ANDROID_APP_STORE: "https://play.google.com/store/apps/details?id=com.truefriend.moida",
+        INTRO: "https://securities.koreainvestment.com/"
+    };
+
+    const ua = util.userAgent();
+
+    var userAgent = navigator.userAgent.toLocaleLowerCase();
+    const appStore = userAgent.match(OS.IOS) ? URL.IOS_APP_STORE : userAgent.match(OS.ANDROID) ? URL.ANDROID_APP_STORE : URL.INTRO;
+
+    var type = getUrlParams().type
+    var id = getUrlParams().id
+    var urlScheme = "moida://feed/" + type + "/" + id
+    var intentURI = "intent://#Intent;scheme=" + urlScheme + "?;package=com.truefriend.moida;end;"
+
+    function openApp() {
+        if (type == undefined || id == undefined || (userAgent.match(OS.ANDROID) == null && userAgent.match(OS.IOS) == null)) {
+            location.replace(URL.INTRO)
+            return;
+        }
+        daumtools.web2app({
+            urlScheme: urlScheme,
+            intentURI: intentURI,
+            appName: '모이다',
+            storeURL: appStore
+        });
+    }
+    openApp();
+
+
+</script>
+</body>
+</html>
