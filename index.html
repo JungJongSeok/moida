@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>모이다</title>
+    <title>Zigbang Smart Home</title>
 
     <link rel="icon"
-          href="https://d1vv4p3ixxyri0.cloudfront.net/companies_logo/9b580f53ad109c40a4f1b62554e22bc1c085c2f351e46bee2550b07ea5bb7e51_148480204573333.png">
+          href="https://www.zigbang.com/favicon.ico">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,user-scalable=no">
@@ -17,7 +17,7 @@
     <script src="js/w2a.js"></script>
 
     <meta property="og:image"
-          content="https://cdn.consumerpost.co.kr/news/photo/201905/204279_104958_5755.png"/>
+          content="https://company.zigbang.com/share/share-1200x630.jpg"/>
 
 </head>
 <body>
@@ -42,30 +42,28 @@
     };
 
     const URL = {
-        IOS_APP_STORE: "https://apps.apple.com/kr/app/한국투자증권-계좌개설포함/id1402480941",
-        ANDROID_APP_STORE: "https://play.google.com/store/apps/details?id=com.truefriend.moida",
-        INTRO: "https://securities.koreainvestment.com/"
+        IOS_APP_STORE: "https://apps.apple.com/kr/app/zigbang-smart-home/id6532601836",
+        ANDROID_APP_STORE: "https://play.google.com/store/apps/details?id=com.zigbang.smarthome.homeapp",
+        INTRO: "https://smarthome.zigbang.com/"
     };
 
     const ua = util.userAgent();
 
-    var userAgent = navigator.userAgent.toLocaleLowerCase();
+    var userAgent = navigator.userAgent.toLowerCase();
     const appStore = userAgent.match(OS.IOS) ? URL.IOS_APP_STORE : userAgent.match(OS.ANDROID) ? URL.ANDROID_APP_STORE : URL.INTRO;
 
-    var type = getUrlParams().type
-    var id = getUrlParams().id
-    var urlScheme = "moida://feed/" + type + "/" + id
-    var intentURI = "intent://#Intent;scheme=" + urlScheme + "?;package=com.truefriend.moida;end;"
+    var urlScheme = "zbhome://com.zigbang.smarthome.homeapp/splash";
+    var intentURI = "intent://#Intent;scheme=" + urlScheme + "?;package=com.zigbang.smarthome.homeapp;end;";
 
     function openApp() {
-        if (type == undefined || id == undefined || (userAgent.match(OS.ANDROID) == null && userAgent.match(OS.IOS) == null)) {
+        if ((userAgent.match(OS.ANDROID) == null && userAgent.match(OS.IOS) == null)) {
             location.replace(URL.INTRO)
             return;
         }
         daumtools.web2app({
             urlScheme: urlScheme,
             intentURI: intentURI,
-            appName: '모이다',
+            appName: 'Zigbang Smart Home',
             storeURL: appStore
         });
     }
